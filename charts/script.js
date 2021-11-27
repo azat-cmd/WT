@@ -76,23 +76,33 @@ var Piechart = function(options){
         }
     }
 }
+let arr = [];
 let data = {};
 function cl (){
-
-    data[document.getElementById("01").value] = document.getElementById("02").value; 
+    
+    let n = (Math.random() * 0xfffff * 1000000).toString(16);
+    
+    arr.push('#' + n.slice(0, 6));
+    data[document.getElementById("01").value] = parseInt(document.getElementById("02").value); 
     document.getElementById("01").value = "";
     document.getElementById("02").value = "";
 
    console.log(data);
+   console.log(arr);
 
 
     var myPiechart = new Piechart(
         {
             canvas:myCanvas,
             data:data,
-            colors:["#fde23e","#f16e23", "#57d9ff","#937e88"],
+            colors:arr,
             legend: myLegend
         }
     );
+    clean();
     myPiechart.draw();
+    
+}
+function clean(){
+    ctx.clearRect(0,0,myCanvas.width,myCanvas.height);
 }
